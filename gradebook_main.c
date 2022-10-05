@@ -19,13 +19,21 @@ int main(int argc, char **argv) {
     gradebook_t *book = NULL;
     if(argc > 1) {
         if(strstr(argv[1], ".txt")) {
-            printf("Gradebook loaded from text file\n");
             book = read_gradebook_from_text(argv[1]);
+            if(book == NULL) {
+                printf("Failed to read gradebook from text file\n");
+            } 
+            else
+                printf("Gradebook loaded from text file\n");
         }
         else if(strstr(argv[1], ".bin")) {
-            printf("Gradebook loaded from binary file\n");
             book = read_gradebook_from_binary(argv[1]);
-        }
+            if(book == NULL) {
+                printf("Failed to read gradebook from binary file\n");
+            } 
+            else
+                printf("Gradebook loaded from binary file\n");
+        }   
         else
             printf("Error: Unknown gradebook file extension\n");
     }
